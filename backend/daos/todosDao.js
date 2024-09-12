@@ -51,6 +51,19 @@ class TodosDao {
       throw new IoError('An error occurred when fetching the todos lists', {cause: err});
     }
   }
+
+  async getAllToDosLists() {
+    const dbConnect = mongoDbClient.getDb();
+
+    try {
+      return await this.mongoDbCollection(dbConnect)
+        .find({})
+        .toArray();
+    } catch (err) {
+      console.error(err.stack);
+      throw new IoError('An error occurred when fetching the todos lists', {cause: err});
+    }
+  }
 }
 
 module.exports = TodosDao;
